@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import dotenv, { config } from 'dotenv'
 import jobR from './routes/jobR.js'
+import cookieParser from "cookie-parser"
 
 const app = express();
 
@@ -20,13 +21,15 @@ const connect = async () => {
 
 app.use(cors())
 app.use(express.json())
+app.use(cookieParser())
 
 app.use("/jobportal/",jobR)
 
 app.use((err, req, res, next) => {
     const errMessage = err.message || "Error from backend"
     const errStatus = err.status || 500
-    res.status(err.message).json({
+
+    res.status(errStatus).json({
         success: false,
         stack: err.stack,
         message: errMessage

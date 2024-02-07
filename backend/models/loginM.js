@@ -1,7 +1,10 @@
 import mongoose from 'mongoose'
 
 export const loginSchema  = mongoose.Schema({
-    username: {
+  id :{
+    type:String,
+  },
+    name: {
         type: String,
         require:true,
         trim: true
@@ -9,15 +12,18 @@ export const loginSchema  = mongoose.Schema({
     email:{
         type: String,
         require:true,
-        trim: true
+       // unique: true
     },
     password:{
         type: String,
         require:true,
         trim: true
 
-    }
-
+    },
+    auth:{
+    type:String,
+    },
+    
 }, {timeStamps :true})
 
 const model = mongoose.model("login",loginSchema)
